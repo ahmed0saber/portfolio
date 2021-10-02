@@ -190,19 +190,13 @@
             @keyframes zooming{
                 0%{
                     width: 75%;
-                    height: 35px;
-                    margin: 5px 0 0 0;
                 }
                 50%{
-                    width: 80%;
-                    height: 41px;
-                    margin: 2px 0 -3px 0;
+                    width: 85%;
                 }
                 100%
                 {
                     width: 75%;
-                    height: 35px;
-                    margin: 5px 0 0 0;
                 }
             }
             .edit{
@@ -618,6 +612,7 @@
         }
     </script>
     <script>
+        var mobile=false;
         if(window.innerWidth<=650){
             document.getElementById("skills").setAttribute('data-aos','zoom-in');
             document.getElementById("contact").setAttribute('data-aos','zoom-in');
@@ -625,8 +620,10 @@
             $(".buttons").addClass("nohover");
             $(".try").addClass("nohover");
             $(".fa").addClass("nohover");
+            mobile=true;
         }
         AOS.init({
+        once: true, 
         duration: 500
         });
     </script>
@@ -638,11 +635,31 @@
             document.getElementById("bio").style.height="0px";
             document.getElementById("bio").style.height=document.getElementById("profile").offsetHeight;
             document.getElementById("bio").style.overflow="auto";
+            if(mobile){
+                document.getElementById("skills").removeAttribute('data-aos','zoom-in');
+                document.getElementById("contact").removeAttribute('data-aos','zoom-in');
+                $(".accordion").removeClass("nohover");
+                $(".buttons").removeClass("nohover");
+                $(".try").removeClass("nohover");
+                $(".fa").removeClass("nohover");
+                mobile=false;
+                console.log("0");
+            }
         }
         else
         {
             document.getElementById("bio").style.overflow="hidden";
             document.getElementById("bio").style.height="auto";
+            if(!mobile){
+                document.getElementById("skills").setAttribute('data-aos','zoom-in');
+                document.getElementById("contact").setAttribute('data-aos','zoom-in');
+                $(".accordion").addClass("nohover");
+                $(".buttons").addClass("nohover");
+                $(".try").addClass("nohover");
+                $(".fa").addClass("nohover");
+                mobile=true;
+                console.log("1");
+            }
         }
     }
     window.addEventListener('resize', reportWindowSize);
