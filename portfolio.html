@@ -1,0 +1,743 @@
+<html>
+    <head>
+        <title>Portfolio</title>
+        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            :root {
+              --body: #bbf;
+              --pri: #3030dd;
+              --title: #005;
+            }
+            *{margin:0;
+            padding:0;
+            font-family: 'Times New Roman', Times, serif;}
+            #profile {grid-area: topLeft;
+            text-align: center;}
+            #bio { grid-area: topRight; }
+            #contact { grid-area: dowmLeft; }
+            #skills { grid-area: downRight; }
+            #projects { grid-area: down; }
+            .divs {
+                margin: 5px auto;
+                width: calc(100% - 6px);
+                box-sizing: border-box;
+                background-color:#fff;
+                border: 1px solid #0003;
+                border-radius:5px;
+                padding:10px;
+            }
+            #grid-container {
+                display: grid;
+                grid-template-areas:
+            'topLeft topRight topRight'
+            'dowmLeft downRight downRight'
+            'down down down';
+                grid-gap: 5px;
+                height: auto;
+                width: auto;
+                margin: auto;
+                background-color:var(--body);
+                padding:6px;
+            }
+            #cover{
+                height:150px;
+                width:100%;
+                box-sizing: border-box;
+                background-color:var(--pri);
+                border-radius:5px 5px 0 0;
+                border: 1px solid #0002;
+            }
+            #profile_pic{
+                height: 150px;
+                width: 150px;
+                border: 4px solid #fff;
+                border-radius:50%;
+                animation: spin0 2.5s linear infinite;
+            }
+            #imgcontainer{
+                border: 12px solid #fff;
+                border-top: 12px solid var(--pri);
+                border-bottom: 12px solid var(--pri);
+                background-color: #ddf;
+                border-radius: 50%;
+                width: 158px;
+                height: 158px;
+                margin: 0px;
+                animation: spin1 2.5s linear infinite;
+            }
+            @keyframes spin0{
+                0% {transform: rotate(0deg);}
+                100% {transform: rotate(360deg);}
+            }
+            @keyframes spin1{
+                0% {transform: rotate(360deg);}
+                100% {transform: rotate(0deg);}
+            }
+            #uncover{
+                background-color: #fff;
+                width: 182px;
+                height: 182px;
+                margin: auto;
+                border-radius: 50%;
+                border: 4px solid #fff;
+                margin: -100px auto 5px auto;
+            }
+            #name{
+                font-size:25px;
+                font-weight:bold;
+                -webkit-text-stroke: 1px #000;
+                color: var(--pri);
+                font-family: 'Times New Roman', Times, serif;
+            }
+            #title{
+                font-size:20px;
+                opacity:0.8;
+                color: var(--title);
+            }
+            .social {
+                color: var(--pri);
+                font-size: 30px;
+                text-align: center;
+                text-decoration: none;
+                line-height: 50px;
+                height: 50px;
+                width: 50px;
+                margin: 10px 4px 5px 4px;
+                background-color: #dde;
+                border-radius: 50%;
+                border: 1px solid #0002;
+                -webkit-tap-highlight-color: rgba(0,0,0,0);
+            }
+            #bio{
+                background-color: var(--pri);
+                overflow-y: auto;
+            }
+            .shaded{
+                color: #fff;
+                text-shadow: 1px 1px 0px #000;
+                font-size: 18px;
+                line-height:26px;
+            }
+            .stroked{
+                color: var(--pri);
+                -webkit-text-stroke: 1px #000;
+                font-size:19px;
+                line-height: 26px;
+            }
+            #contact{
+                background-color: var(--pri);
+            }
+            #projectsContainer{
+                display: flex;
+                flex-wrap: wrap;
+            }
+            #project{
+                width:calc(25% - 30px);
+                text-align: center;
+                margin: 4px;
+                border: 1px solid #0002;
+                padding: 10px;
+                background-color: var(--pri);
+                border-radius: 5px;
+                position: relative;
+            }
+            .front{
+              width: 100%;
+            }
+            .back{
+              position: absolute;
+              width: calc(100% - 20px);
+              top: 0;
+              margin: 10px 0px;
+              display: none;
+              background-color: #0005;
+              color: #fff;
+              border-radius: 5px;
+            }
+            .centered{
+              position: absolute;
+              top: 50%;
+              width: 100%;
+              -ms-transform: translateY(-50%);
+              transform: translateY(-50%);
+            }
+            .projectImg{
+                width:100%;
+                height: auto;
+                margin: 0 0 5px 0;
+                border: 1px solid #0002;
+                border-radius: 5px;
+                box-sizing: border-box;
+                transition: filter 0.6s linear;
+            }
+            .blur { filter: blur(3px); }
+            .try{
+                width: 75%;
+                height: 35px;
+                margin: 5px 0 0 0;
+                border: 2px solid #fff;
+                border-radius: 5px;
+                background-color: var(--pri);
+                color: #fff;
+                font-size: 18px;
+                animation: zooming 1s linear infinite;
+            }
+            @keyframes zooming{
+                0%{
+                    width: 75%;
+                    height: 35px;
+                    margin: 5px 0 0 0;
+                }
+                50%{
+                    width: 80%;
+                    height: 41px;
+                    margin: 2px 0 -3px 0;
+                }
+                100%
+                {
+                    width: 75%;
+                    height: 35px;
+                    margin: 5px 0 0 0;
+                }
+            }
+            .edit{
+              width: 135px;
+              height: 35px;
+              font-size: 17px;
+              margin: 5px;
+              border: 1px solid #0002;
+              border-radius: 5px;
+              background-color: var(--pri);
+              color: #fff;
+            }
+            .react{
+              width: 80px;
+              height: 35px;
+              font-size: 19px;
+              margin: 5px 0px 0px 0px;
+              border: 2px solid #fff;
+              border-radius: 0px 0px 0px 5px;
+              background-color: var(--pri);
+              color: #fff;
+            }
+            .liker{
+              padding: 2px;
+            }
+            #likes{
+              float: right;
+              color: #fff;
+              margin: 14px 0 0 0;
+            }
+            .more{
+              width: 135px;
+              height: 35px;
+              font-size: 19px;
+              margin: 5px;
+              border: 1px solid #0002;
+              border-radius: 5px;
+              background-color: var(--pri);
+              color: #fff;
+            }
+            .save{
+              width: 80px;
+              height: 35px;
+              font-size: 19px;
+              border: 2px solid #fff;
+              border-radius: 50px;
+              background-color: var(--pri);
+              color: #fff;
+              margin: 5px;
+              margin-left: calc(50% - 40px);
+            }
+            .hidden{
+              opacity: 0;
+              transition-duration: 1s;
+            }
+            hr{
+              border: 1px solid #fff9;
+              width: 80%;
+              margin-left: 10%;
+            }
+            #righted{
+              float: right;
+              font-size: 16px;
+            }
+            .header{
+              font-size: 25px;
+              padding: 5px;
+              background-color: #bbb3;
+              border: 1px solid #0002;
+              border-radius: 5px 5px 0 0;
+            }
+            ::-webkit-scrollbar {
+                width: 15px;
+            }
+            ::-webkit-scrollbar-track {
+                background: #d9d9d944;
+                border-radius: 0px 3px 3px 0px;
+                border: 1px solid #fff2;
+            }
+            ::-webkit-scrollbar-thumb {
+                background: #d9d9d955;
+                border-radius: 0px 3px 3px 0px;
+                border: 1px solid #fff2;
+            }
+            ::-webkit-scrollbar-thumb:hover {
+                background: #d9d9d977;
+            }
+            .social:hover{
+                opacity: 0.7;
+            }
+            button{
+                -webkit-tap-highlight-color: rgba(0,0,0,0);
+            }
+            button:hover{
+                opacity: 0.7;
+                cursor: pointer;
+            }
+            .accordion {
+                background-color: #eee;
+                color: #000;
+                cursor: pointer;
+                padding: 15px;
+                width: 100%;
+                border: 1px solid #0002;
+                text-align: left;
+                outline: none;
+                font-size: 20px;
+            }
+            .active, .accordion:hover {
+                background-color: #ccc;
+                opacity: 1;
+            }
+            .panel {
+                padding: 0;
+                background-color: #ddd;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.2s ease-out;
+            }
+            .new1{
+                background-color: #fff;
+                color: #000;
+                border: 1px solid #000;
+            }
+
+
+
+
+
+
+
+
+            @media screen and (max-width: 1250px) {
+                #grid-container{
+                    grid-template-areas: 
+                    'topLeft topRight'
+                    'dowmLeft downRight'
+                    'down down';
+                }
+                #project{
+                    width:calc(100%/3 - 30px);
+                }
+            }
+            @media screen and (max-width: 950px) {
+                #grid-container{
+                    grid-template-areas: 
+                    'topLeft topRight'
+                    'dowmLeft downRight'
+                    'down down';
+                }
+                #project{
+                    width:calc(50% - 30px);
+                }
+            }
+            @media screen and (max-width: 650px) {
+                #grid-container{
+                    grid-template-areas: 
+                    'topLeft'
+                    'topRight'
+                    'downRight'
+                    'dowmLeft'
+                    'down';
+                }
+                #project{
+                    width:calc(100% - 30px);
+                }
+                .social:hover{
+                    opacity: 1;
+                }
+                button:hover{
+                    opacity: 1;
+                }
+                .active , .accordion:hover {
+                    background-color: #eee;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="grid-container">
+            <div id="profile" class="divs">
+                <div id="cover"></div>
+                <div id="uncover">
+                    <div id="imgcontainer">
+                        <img src="https://drive.google.com/uc?id=1LerskcCbdpHcbnCKzKUoW0AcqtuRJoj5&export=download" id="profile_pic">
+                    </div>
+                </div>
+                <p id="name">Ahmed Saber</p>
+                <p id="title">Frontend web developer</p>
+                <p id="title">Android developer</p>
+                <p id="title">UI/UX designer</p>
+                <a href="https://www.facebook.com/profile.php?id=100004875915808" class="fa fa-facebook social" target="_blank"></a>
+                <a href="https://api.whatsapp.com/send?phone=+201208611892&text=Hello" class="fa fa-whatsapp social" target="_blank"></a>
+                <a href="https://t.me/ahmed0saber" class="fa fa-telegram social" target="_blank"></a>
+                <a href="https://github.com/ahmed0saber" class="fa fa-github social" target="_blank"></a><br>
+                <button class="edit buttons" onclick="pic()">Change Picture</button>
+                <button class="edit buttons" onclick="theme()">Change Theme</button>
+                <p>You can change the theme and profile picture using these two buttons , Just try !!</p>
+            </div>
+            <div id="bio" class="divs">
+                <p class="shaded header">Who is me ?!<span id="righted">1 minute read</span></p>
+                <p class="shaded">Hello there ,<br>My name is Ahmed Saber , An egyptian developer who was born in 2001.<br>I like coding , gaming , painting , reading , writing and finally you.</p><hr><p class="shaded">Looking at past , I used to play computer games when I was less than 10 years , I still remember these games , Warcraft , red alert , stronghold crusader , epic war III/IV/V/saga and more , which made me think about how these games got created , asking my friend Google , I got introduced to Scratch , Game maker studio and Construct 2 , which helped me create my first few games and upload them to Kongregate.</p><hr><p class="shaded">After years , I met Sketchware on my road "The road to be programmer" which is an easy-to-use tool making android app development more and more easier.</p><hr><p class="shaded">Years later , I just wanted to know how these game engines treat with machine , ok we all know the rest , I have become a coder.</p><hr><p class="shaded">Beginning with C++ to get an idea about this topic called coding , then Python because I wanted to let the hacker inside me out by scraping and automating web pages.</p><hr><p class="shaded">But now , I'm the one creating these pages , how weird , I have become a web developer , yet my designs were scary that's why I'm learning UI/UX design.</p>
+                <button class="react buttons" onclick="like()"><i class="fa fa-thumbs-up liker"></i><span id="likebtn">Like</span></button>
+                <p id="likes"><span id="counter">0</span> people liked this</p>
+            </div>
+            <div id="contact" class="divs">
+                <p class="shaded header">Contact info</p>
+                <p class="shaded">Name : Ahmed Saber</p>
+                <p class="shaded">Birthday : 5 july 2001</p>
+                <p class="shaded">Address : Desouk , Kafr El Sheikh , Egypt</p>
+                <p class="shaded">Phone number : +20 120 861 1892</p>
+                <p class="shaded">Gmail : ahmed0saber33@gmail.com</p>
+                <a id="infoPic" href="https://drive.google.com/uc?id=1YZHzIcZ6SZTKKL-go10-bY1e5mqhYv0G&export=download" download><button class="save buttons">Save</button></a>
+            </div>
+            <div id="skills" class="divs">
+                <p class="stroked header">My skills</p>
+                <p class="stroked">-HTML<span class="hidden">/HTML5</span></p>
+                <p class="stroked">-CSS<span class="hidden">/CSS3 , Bootstrap</span></p>
+                <p class="stroked">-JavaScript<span class="hidden">/ES6 , jQuery , electronJS</span></p>
+                <p class="stroked">-Dart<span class="hidden"> , Flutter</span></p>
+                <p class="stroked"><span class="hidden">-C++</span></p>
+                <button class="more buttons" onclick="show()" id="showhide">See more</button>
+            </div>
+
+
+            <div id="projects" class="divs">
+                <p class="stroked header">My projects<span id="righted">9 projects</span></p>
+                <button class="accordion">Web projects<span id="righted">7 projects</span></button>
+                <div class="panel">
+                    <div id="projectsContainer">
+                        <div id="project">
+                            <div class="front">
+                                <img class="projectImg" src="b.png">
+                            </div>
+                            <div class="back">
+                              <div class="centered">
+                                <p>Project 1</p>
+                                <p>Description</p>
+                                <button class="try">Try Now</button>
+                                </div>
+                            </div>
+                            <button class="try backbtn" onclick="moreInfo(0)">More info</button>
+                        </div>
+                        
+                        <div id="project">
+                            <div class="front">
+                                <img class="projectImg" src="bb.png">
+                            </div>
+                            <div class="back">
+                              <div class="centered">
+                                <p>Project 2</p>
+                                <p>Description</p>
+                                <button class="try">Try Now</button>
+                                </div>
+                            </div>
+                            <button class="try backbtn" onclick="moreInfo(1)">More info</button>
+                        </div>
+                        
+                        <div id="project">
+                            <div class="front">
+                                <img class="projectImg" src="bbb.png">
+                            </div>
+                            <div class="back">
+                              <div class="centered">
+                                <p>Project 3</p>
+                                <p>Description</p>
+                                <button class="try">Try Now</button>
+                                </div>
+                            </div>
+                            <button class="try backbtn" onclick="moreInfo(2)">More info</button>
+                        </div>
+                        
+                        <div id="project">
+                            <div class="front">
+                                <img class="projectImg" src="bbbb.png">
+                            </div>
+                            <div class="back">
+                              <div class="centered">
+                                <p>Project 4</p>
+                                <p>Description</p>
+                                <button class="try">Try Now</button>
+                                </div>
+                            </div>
+                            <button class="try backbtn" onclick="moreInfo(3)">More info</button>
+                        </div>
+                        
+                        <div id="project">
+                            <div class="front">
+                                <img class="projectImg" src="bbbbb.png">
+                            </div>
+                            <div class="back">
+                              <div class="centered">
+                                <p>Project 5</p>
+                                <p>Description</p>
+                                <button class="try">Try Now</button>
+                                </div>
+                            </div>
+                            <button class="try backbtn" onclick="moreInfo(4)">More info</button>
+                        </div>
+
+                        <div id="project">
+                            <div class="front">
+                                <img class="projectImg" src="bbbbbb.png">
+                            </div>
+                            <div class="back">
+                              <div class="centered">
+                                <p>Project 6</p>
+                                <p>Description</p>
+                                <button class="try">Try Now</button>
+                                </div>
+                            </div>
+                            <button class="try backbtn" onclick="moreInfo(5)">More info</button>
+                        </div>
+                    </div><!--projectsContainer-->
+                </div><!--panel-->
+
+                <button class="accordion">Android apps<span id="righted">1 project</span></button>
+                <div class="panel">
+                    <div id="projectsContainer">
+                        <div id="project">
+                            <div class="front">
+                                <img class="projectImg" src="https://via.placeholder.com/404x250">
+                            </div>
+                            <div class="back">
+                              <div class="centered">
+                                <p>Project 1</p>
+                                <p>Description</p>
+                                <button class="try">Try Now</button>
+                                </div>
+                            </div>
+                            <button class="try backbtn" onclick="moreInfo(6)">More info</button>
+                        </div>
+                    </div><!--projectsContainer-->
+                </div><!--panel-->
+
+                <button class="accordion">UI/UX designs<span id="righted">1 project</span></button>
+                <div class="panel">
+                    <div id="projectsContainer">
+                        <div id="project">
+                            <div class="front">
+                                <img class="projectImg" src="d.png">
+                            </div>
+                            <div class="back">
+                              <div class="centered">
+                                <p>Project 1</p>
+                                <p>Description</p>
+                                <button class="try">Try Now</button>
+                                </div>
+                            </div>
+                            <button class="try backbtn" onclick="moreInfo(7)">More info</button>
+                        </div>
+                    </div><!--projectsContainer-->
+                </div><!--panel-->
+
+
+
+
+                
+                
+            </div><!--projects-->
+        </div><!--grid-container-->
+    </body>
+    <script>
+      $(document).ready(function() {
+        $(".nohover").click(function() {
+          $(this).addClass("new1");
+          setTimeout(function(){
+            $(".new1").removeClass("new1");
+          },100);
+        });
+      });
+    </script>
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+        
+        for (i = 0; i < acc.length; i++) {
+          acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+              panel.style.maxHeight = null;
+            } else {
+              panel.style.maxHeight = panel.scrollHeight + "px";
+            } 
+          });
+        }
+    </script>
+    <script>
+        if(window.innerWidth<=650){
+            document.getElementById("skills").setAttribute('data-aos','zoom-in');
+            document.getElementById("contact").setAttribute('data-aos','zoom-in');
+            $(".accordion").addClass("nohover");
+            $(".buttons").addClass("nohover");
+            $(".try").addClass("nohover");
+            $(".fa").addClass("nohover");
+        }
+        AOS.init({
+        duration: 500
+        });
+    </script>
+    <script>
+    reportWindowSize();
+    function reportWindowSize() {
+        if(window.innerWidth>650)
+        {
+            document.getElementById("bio").style.height="0px";
+            document.getElementById("bio").style.height=document.getElementById("profile").offsetHeight;
+            document.getElementById("bio").style.overflow="auto";
+        }
+        else
+        {
+            document.getElementById("bio").style.overflow="hidden";
+            document.getElementById("bio").style.height="auto";
+        }
+    }
+    window.addEventListener('resize', reportWindowSize);
+
+    
+    var alerted = false;
+    var hidden = true;
+    var picNum = 0;
+    var pics = ["https://drive.google.com/uc?id=1LerskcCbdpHcbnCKzKUoW0AcqtuRJoj5&export=download","https://drive.google.com/uc?id=1Yz8dbMRUjJYIwAN8Wp7PlrwQ74Vl5UVq&export=download"];
+    var themeNum = 0;
+    themes = ["#3030dd","#800080","#b82020","#308830","#008080","#808000"];
+    themes2 = ["#bbf","#eae","#fbb","#bfb","#aee","#eea"];
+    themes3 = ["#005","#505","#500","#050","#055","#550"];
+    
+    if(localStorage.getItem("index3")==1)
+    {
+      alerted=true;
+    }
+    
+    if(localStorage.getItem("index2")==0 || localStorage.getItem("index2")==1)
+    {
+      picNum=parseInt(localStorage.getItem("index2"));
+      pic();
+    }
+    
+    if(localStorage.getItem("index")<6 && localStorage.getItem("index")>0)
+    {
+      themeNum=parseInt(localStorage.getItem("index"))-1;
+      theme();
+    }
+    
+    $.getJSON("https://api.countapi.xyz/get/likes/ea519fd0-3d00-42f0-8a05-71080cce09b1", function(response) {
+    console.log(response);
+    $("#counter").text(response.value);
+    });
+    if(localStorage.getItem("liked")=="y")
+    {
+      document.getElementById("likebtn").textContent="Liked";
+    }
+    
+    function like()
+    {
+    if(localStorage.getItem("liked")=="y")
+    {
+    }
+    else
+    {
+    var views = new XMLHttpRequest();
+    $.getJSON("https://api.countapi.xyz/get/likes/ea519fd0-3d00-42f0-8a05-71080cce09b1", function(response) {
+    console.log(response);
+    $("#counter").text(response.value+1);
+    });
+    document.getElementById("likebtn").textContent="Liked";
+    views.open("GET", "https://api.countapi.xyz/hit/likes/ea519fd0-3d00-42f0-8a05-71080cce09b1");
+    views.responseType = "json";
+    views.send();
+    localStorage.setItem("liked", "y");
+    }
+    }
+    
+      function show()
+      {
+        var x = document.getElementsByClassName("hidden");
+        for (var i = 0; i < x.length; i++) {
+          if(hidden)
+          {
+          x[i].style.opacity = "1";
+          }
+          else
+          {
+            x[i].style.opacity = "0";
+          }
+          }
+          if(hidden)
+          {hidden = false;
+            document.getElementById("showhide").textContent="See less";
+          }
+          else{hidden = true;
+            document.getElementById("showhide").textContent="See more";
+          }
+      }
+      
+      function pic()
+      {
+        localStorage.setItem("index2", picNum);
+        if(picNum==0)
+        {picNum=1;}
+        else
+        {picNum=0;}
+        document.getElementById("profile_pic").src=pics[picNum];
+        if(!alerted)
+        {
+        alert("This process may take seconds , that depends upon your internet connection");
+        alerted=true;
+        localStorage.setItem("index3","1");
+        }
+      }
+      
+      function theme()
+      {
+        themeNum+=1;
+        localStorage.setItem("index", themeNum);
+        document.querySelector(':root').style.setProperty('--pri',themes[themeNum]);
+        document.querySelector(':root').style.setProperty('--body',themes2[themeNum]);
+        document.querySelector(':root').style.setProperty('--title',themes3[themeNum]);
+        if(themeNum==5)
+        {themeNum=-1;}
+      }
+      
+      function moreInfo(x)
+      {
+        document.getElementsByClassName("projectImg")[x].classList.toggle('blur');
+        if(document.getElementsByClassName("back")[x].style.display==false || document.getElementsByClassName("back")[x].style.display=="none")
+        {
+          document.getElementsByClassName("back")[x].style.height=document.getElementsByClassName("front")[x].offsetHeight-5;
+        document.getElementsByClassName("back")[x].style.display="block";
+        document.getElementsByClassName("backbtn")[x].textContent="Less info";
+        }
+        else{
+          document.getElementsByClassName("back")[x].style.display="none";
+          document.getElementsByClassName("backbtn")[x].textContent="More info";
+        }
+      }
+    </script>
+</html>
